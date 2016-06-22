@@ -1,10 +1,11 @@
-This repository contains helper scripts to running OpenSwitch in container mode inside GNS3.
+This repository holds Dockerfiles that can be used to build images that are useful
+inside GNS3 container environments for demo purposes.
 
-To use GNS3 with OpenSwitch, you need a tar.gz file with the filesystem from OpenSwitch's 
-appliance target (no, you cannot use the genericx86-64, since his port layout is 
-incompatible with GNS3). But the appliance images is targeted to run on real hardware, so
-there is some minor adjustments that need to be done in order to run smoothly on a container
-environment.
+The following images are available:
 
-The generate-docker-image.sh script modifies an appliance tarball to be suitable for use as
-container in GNS3.
+- OpenSwitch: creates an openswitch container image out of the appliance tarball.
+  The genericx86-64 images from openswitch can't be used with GNS3, since the port
+  map is incompatible.
+
+- Ubuntu: creates a system container image with Ubuntu for GNS3 labs.
+
