@@ -1,11 +1,33 @@
+# OpenSwitch Docker files for GNS3
+
 This repository holds Dockerfiles that can be used to build images that are useful
 inside GNS3 container environments for demo purposes.
 
 The following images are available:
 
-- OpenSwitch: creates an openswitch container image out of the appliance tarball.
-  The genericx86-64 images from openswitch can't be used with GNS3, since the port
-  map is incompatible.
+## OpenSwitch
+Creates an openswitch container image out of the appliance tarball.
+The genericx86-64 images from openswitch can't be used with GNS3, since the port
+map is incompatible.
 
-- Ubuntu: creates a system container image with Ubuntu for GNS3 labs.
+Example to build this image:
 
+```
+cd openswitch
+docker build -t openswitch-appliance:local .
+
+```
+
+## Ubuntu
+Creates a system container image with Ubuntu for GNS3 labs.
+
+```
+cd ubuntu
+docker build -t ubuntu:gns3 .
+```
+
+If you are behind a corporate firewall you may want to pass the information about
+the proxy during the build:
+```
+docker build --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy -t ubuntu:gns3 .
+```

@@ -6,13 +6,17 @@ RUN	echo 'Dpkg::Progress-Fancy "1";' | tee -a /etc/apt/apt.conf.d/99progressbar 
 	&& apt-get update && apt-get install -y \
 	   isc-dhcp-client kbd xkb-data vim-common bzip2 keyboard-configuration \
            net-tools iptables apt-utils add-apt-key software-properties-common \
-           inetutils-tools \
+           inetutils-tools inetutils-ping inetutils-telnet inetutils-traceroute \
+           inetutils-ftp knot-dnsutils dnsmasq isc-dhcp-server ifupdown sudo wget curl \
 	\
 	&& add-apt-repository -y ppa:ansible/ansible && apt-get update && \
-	   apt-get install -y ansible sshpass
-	&& useradd -s /bin/bash -U -G sudo -m -d /home/ubuntu -p ubuntu ubuntu \
+	   apt-get install -y ansible sshpass \
+	&& useradd -s /bin/bash -U -G sudo -m -d /home/ubuntu -p $(echo "ubuntu" | openssl passwd -1 -stdin) ubuntu \
 	\
-	&& rm -Rf /etc/systemd/system/getty.target.wants/ \
+	&& mkdir -p /etc/network \
+	&& sed -i -e 's/apparmor.service//g' /lib/systemd/system/ifup\@.service \
+	&& systemctl enable ifup@eth0.service && systemctl enable ifup@eth1.service \
+	&& rm -Rf /etc/systemd/system/getty.target.wants/
 
 CMD ["/sbin/init"]
 
