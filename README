@@ -18,16 +18,16 @@ docker build -t openswitch-appliance:local .
 
 ```
 
-## Ubuntu
-Creates a system container image with Ubuntu for GNS3 labs.
+## DC Controller
+Creates a system container image with Ubuntu DC Controller for GNS3 labs.
 
 ```
 cd ubuntu
-docker build -t ubuntu:gns3 .
+docker build -t ubuntu:dc-controller .
 ```
 
 If you are behind a corporate firewall you may want to pass the information about
 the proxy during the build:
 ```
-docker build --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy -t ubuntu:gns3 .
+docker build --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy -t ubuntu:dc-controller .
 ```
